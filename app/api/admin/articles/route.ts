@@ -86,7 +86,12 @@ export async function PUT(request: NextRequest) {
       )
     }
 
-    let updateData: any = {}
+    const updateData: {
+      status?: 'PUBLISHED' | 'DRAFT'
+      publishedAt?: Date
+      reviewedAt?: Date
+      reviewFeedback?: string
+    } = {}
     
     if (validatedData.action === 'APPROVE') {
       updateData.status = 'PUBLISHED'

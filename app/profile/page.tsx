@@ -85,7 +85,7 @@ export default async function ProfilePage() {
           {user.role === 'ADMIN' && (
             <div className="mt-4 p-3 bg-purple-50 border border-purple-200 rounded-md">
               <p className="text-sm text-purple-800">
-                您拥有管理员权限。如果导航栏未显示"管理员"标签，请
+                您拥有管理员权限。如果导航栏未显示&quot;管理员&quot;标签，请
                 <a href="/api/auth/logout" className="font-medium underline hover:text-purple-900 ml-1">
                   重新登录
                 </a>

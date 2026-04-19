@@ -93,7 +93,10 @@ export async function PUT(
     const body = await request.json()
     const validatedData = updateArticleSchema.parse(body)
 
-    const updateData: any = { ...validatedData }
+    const updateData: Partial<z.infer<typeof updateArticleSchema>> & { 
+      submittedAt?: Date; 
+      publishedAt?: Date 
+    } = { ...validatedData }
     
     if (validatedData.status === 'PENDING_REVIEW') {
       updateData.submittedAt = new Date()

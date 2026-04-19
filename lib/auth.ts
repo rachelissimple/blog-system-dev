@@ -4,6 +4,13 @@ import { cookies } from 'next/headers'
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production'
 
+interface JwtPayload {
+  userId: string
+  role: string
+  iat?: number
+  exp?: number
+}
+
 export async function hashPassword(password: string): Promise<string> {
   return await bcrypt.hash(password, 10)
 }
@@ -16,9 +23,13 @@ export function generateToken(userId: string, role: string): string {
   return jwt.sign({ userId, role }, JWT_SECRET, { expiresIn: '7d' })
 }
 
-export function verifyToken(token: string): any {
+export function verifyToken(token: string): JwtPayload | null {
   try {
-    return jwt.verify(token, JWT_SECRET)
+    const decoded = jwt.verify(token, JWT_SECRET)
+    if (typeof decoded === 'string') {
+      return null
+    }
+    return decoded as JwtPayload
   } catch {
     return null
   }
@@ -40,7 +51,7 @@ export async function clearAuthToken() {
   cookieStore.delete('auth_token')
 }
 
-export async function getCurrentUser() {
+export async function getCurrentUser(): Promise<JwtPayload | null> {
   const cookieStore = await cookies()
   const token = cookieStore.get('auth_token')?.value
   
