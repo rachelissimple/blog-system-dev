@@ -5,16 +5,11 @@
       "src": "package.json",
       "use": "@vercel/next",
       "config": {
-        "installCommand": "npm ci"
+        "installCommand": "npm ci",
+        "maxLambdaSize": "10mb"
       }
     }
   ],
-  "build": {
-    "env": {
-      "PRISMA_GENERATE_DATAPROXY": "0",
-      "PRISMA_SKIP_POSTINSTALL_GENERATE": "0"
-    }
-  },
   "routes": [
     {
       "src": "/api/(.*)",
@@ -37,11 +32,6 @@
     "NODE_ENV": "production"
   },
   "regions": ["hkg1"],
-  "functions": {
-    "app/api/**/*.ts": {
-      "maxDuration": 10
-    }
-  },
   "git": {
     "deploymentEnabled": {
       "main": true,
