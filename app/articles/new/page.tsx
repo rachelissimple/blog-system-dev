@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
+export const dynamic = 'force-dynamic'
+
 export default function NewArticlePage() {
   const router = useRouter()
   const [title, setTitle] = useState('')
