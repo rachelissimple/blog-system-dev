@@ -6,7 +6,7 @@ import SubmitReviewButton from '../components/SubmitReviewButton'
 export const dynamic = 'force-dynamic'
 
 export default async function ProfilePage() {
-  const userSession = await getCurrentUser()
+  const userSession = getCurrentUser()
   
   if (!userSession) {
     return (

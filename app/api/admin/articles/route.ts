@@ -12,7 +12,7 @@ const reviewActionSchema = z.object({
 
 export async function GET(request: NextRequest) {
   try {
-    const currentUser = await getCurrentUser()
+    const currentUser = getCurrentUser()
     
     if (!currentUser || currentUser.role !== 'ADMIN') {
       return NextResponse.json(
@@ -54,7 +54,7 @@ export async function GET(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
   try {
-    const currentUser = await getCurrentUser()
+    const currentUser = getCurrentUser()
     
     if (!currentUser || currentUser.role !== 'ADMIN') {
       return NextResponse.json(

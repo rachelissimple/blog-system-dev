@@ -36,8 +36,8 @@ export function verifyToken(token: string): JwtPayload | null {
 }
 
 export async function setAuthToken(token: string) {
-  const cookieStore = await cookies()
-  cookieStore.set('auth_token', token, {
+  const cookieStore = cookies()
+  await cookieStore.set('auth_token', token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict',
@@ -47,12 +47,12 @@ export async function setAuthToken(token: string) {
 }
 
 export async function clearAuthToken() {
-  const cookieStore = await cookies()
-  cookieStore.delete('auth_token')
+  const cookieStore = cookies()
+  await cookieStore.delete('auth_token')
 }
 
-export async function getCurrentUser(): Promise<JwtPayload | null> {
-  const cookieStore = await cookies()
+export function getCurrentUser(): JwtPayload | null {
+  const cookieStore = cookies()
   const token = cookieStore.get('auth_token')?.value
   
   if (!token) return null

@@ -2,13 +2,15 @@ import { notFound } from 'next/navigation'
 import { prisma } from '@/lib/prisma'
 import { getCurrentUser } from '@/lib/auth'
 
+export const dynamic = 'force-dynamic'
+
 interface ArticlePageProps {
   params: Promise<{ id: string }>
 }
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { id } = await params
-  const currentUser = await getCurrentUser()
+  const currentUser = getCurrentUser()
   
   try {
     const article = await prisma.article.findUnique({

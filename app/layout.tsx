@@ -5,6 +5,8 @@ import { getCurrentUser } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import Navbar from './components/Navbar'
 
+export const dynamic = 'force-dynamic'
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -19,7 +21,7 @@ export default async function RootLayout({
 }) {
   let currentUser = null
   try {
-    const userSession = await getCurrentUser()
+    const userSession = getCurrentUser()
     if (userSession) {
       currentUser = await prisma.user.findUnique({
         where: { id: userSession.userId },

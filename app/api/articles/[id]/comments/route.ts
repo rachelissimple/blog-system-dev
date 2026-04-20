@@ -3,6 +3,8 @@ import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
 import { getCurrentUser } from '@/lib/auth'
 
+export const dynamic = 'force-dynamic'
+
 const createCommentSchema = z.object({
   content: z.string().min(1).max(1000),
 })
@@ -46,7 +48,7 @@ export async function POST(
 ) {
   try {
     const { id } = await params
-    const currentUser = await getCurrentUser()
+    const currentUser = getCurrentUser()
     
     if (!currentUser) {
       return NextResponse.json(

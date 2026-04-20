@@ -3,6 +3,8 @@ import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
 import { getCurrentUser } from '@/lib/auth'
 
+export const dynamic = 'force-dynamic'
+
 const updateArticleSchema = z.object({
   title: z.string().min(1).max(200).optional(),
   content: z.string().min(1).optional(),
@@ -16,7 +18,7 @@ export async function GET(
 ) {
   try {
     const { id } = await params
-    const currentUser = await getCurrentUser()
+    const currentUser = getCurrentUser()
     
     const article = await prisma.article.findUnique({
       where: { id },
@@ -62,7 +64,7 @@ export async function PUT(
 ) {
   try {
     const { id } = await params
-    const currentUser = await getCurrentUser()
+    const currentUser = getCurrentUser()
     
     if (!currentUser) {
       return NextResponse.json(
@@ -143,7 +145,7 @@ export async function DELETE(
 ) {
   try {
     const { id } = await params
-    const currentUser = await getCurrentUser()
+    const currentUser = getCurrentUser()
     
     if (!currentUser) {
       return NextResponse.json(
