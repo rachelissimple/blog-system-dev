@@ -3,6 +3,8 @@ import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
 import { getCurrentUser } from '@/lib/auth'
 
+export const dynamic = 'force-dynamic'
+
 const reviewActionSchema = z.object({
   action: z.enum(['APPROVE', 'REJECT']),
   feedback: z.string().optional(),

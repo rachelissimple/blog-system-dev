@@ -3,6 +3,8 @@ import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
 import { getCurrentUser } from '@/lib/auth'
 
+export const dynamic = 'force-dynamic'
+
 const updateUserRoleSchema = z.object({
   role: z.enum(['USER', 'ADMIN']),
 })
