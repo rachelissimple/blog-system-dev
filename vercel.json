@@ -1,41 +1,4 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/next",
-      "config": {
-        "installCommand": "npm install",
-        "maxLambdaSize": "10mb"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1",
-      "headers": {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization"
-      }
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1",
-      "headers": {
-        "Cache-Control": "public, max-age=3600, s-maxage=3600"
-      }
-    }
-  ],
-  "env": {
-    "NODE_ENV": "production"
-  },
-  "regions": ["hkg1"],
-  "git": {
-    "deploymentEnabled": {
-      "main": true,
-      "develop": true
-    }
-  }
+  "framework": "nextjs",
+  "regions": ["hkg1"]
 }
